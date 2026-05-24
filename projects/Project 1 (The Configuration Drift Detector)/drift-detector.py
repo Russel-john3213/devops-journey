@@ -1,12 +1,22 @@
-# Line 1: We import the "json" library. This gives Python special powers to read JSON files.
 import json
 
-# Line 2: We open the file "config.json". We give it a temporary nickname called "my_file".
+# 1. Read the desired configuration file
 with open(r"c:\Users\Awjaypogi\Desktop\devops-journey\projects\Project 1 (The Configuration Drift Detector)\config.json", "r") as my_file:
-    
-    # Line 3: We tell the json library to read the file and turn it into a Python "dictionary".
-    server_settings = json.load(my_file)
+    desired_settings = json.load(my_file)
 
-# Line 4: We print the settings out on the screen so we can see them!
-print("Success! Here are the settings we found:")
-print(server_settings)
+# 2. Fake "Live" Server Data (Simulating that someone changed the max players!)
+live_server_settings = {
+    "server_name": "My_Roblox_Server",
+    "max_players": 100,  # Look! This is 100, but our JSON file says 50!
+    "status": "online"
+}
+
+print("--- Starting Configuration Drift Check ---")
+
+# 3. Compare the 'max_players' value between both dictionaries using if/else
+if desired_settings["max_players"] == live_server_settings["max_players"]:
+    print("✅ Success: Max players setting matches perfectly!")
+else:
+    print("⚠️ ALERT: Configuration Drift Detected!")
+    print(f"Expected: {desired_settings['max_players']}")
+    print(f"Live Server Has: {live_server_settings['max_players']}")
