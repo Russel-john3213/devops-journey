@@ -1,0 +1,4 @@
+Total errors found: 2
+detailed log
+2026-05-27 12:01:15 ERROR Database connection timeout pool-2.
+2026-05-27 12:03:11 ERROR Failed to process payment for checkout string.
