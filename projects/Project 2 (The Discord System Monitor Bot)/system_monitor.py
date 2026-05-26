@@ -3,7 +3,7 @@ import requests
 import time
 
 # 1. Configuration Settings
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1508594345593540638/vXL4Kwxmy7SIfFlqXmRXzTIVT_yKYgaXKw8q6hAso4n8DrPUz_JGKV6i-UqHXOX70hA8"
+DISCORD_WEBHOOK_URL = "linklinklink"
 CPU_THRESHOLD = 30.0  # The alert level percentage
 CHECK_INTERVAL = 5    # How many seconds to wait between checks
 
