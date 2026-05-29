@@ -1,0 +1,14 @@
+{
+  "environment": "Production",
+  "discord_webhook": "linklink",
+  "targets": [
+    {
+      "name": "Main Website API",
+      "url": "https://httpbin.org/status/200"
+    },
+    {
+      "name": "Authentication Service",
+      "url": "https://httpbin.org/status/500"
+    }
+  ]
+}
