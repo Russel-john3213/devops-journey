@@ -1,0 +1,15 @@
+# Ignore python virtual environments
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+
+# Ignore local git configurations and documentation
+.git/
+.gitignore
+README.md
+
+# Ignore local logs or secrets you don't want baked in
+*.log
+.env

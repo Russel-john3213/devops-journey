@@ -1,18 +1,27 @@
 import os
 import json
 import requests
+from pathlib import Path
+from dotenv import load_dotenv
 
+# 1. Dynamically find the exact folder where this dashboard.py file lives
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
 LOG_PATH = os.path.join(BASE_DIR, "logs.txt")
 
+# 2. Tell python-dotenv to read the .env file sitting right next to this script
+ENV_PATH = os.path.join(BASE_DIR, ".env")
+load_dotenv(dotenv_path=ENV_PATH)
+
+# Temporary debug line to confirm what python-dotenv extracted:
+print("DEBUG: Webhook value loaded is ->", os.environ.get("discord_webhook"))
+
 system_has_failed_nodes = False
 with open(CONFIG_PATH, "r") as CONFIG_FILE:
     CONFIG_DATA = json.load(CONFIG_FILE)
-    # 1. Start the loop to go through every target box
+    
+    # Start the loop to go through every target box
     for target in CONFIG_DATA["targets"]:
-        
-        # 2. Extract the name and URL directly from the active target box
         site_name = target["name"]
         site_url = target["url"]
         response = requests.get(site_url)
@@ -26,6 +35,7 @@ with open(CONFIG_PATH, "r") as CONFIG_FILE:
 if system_has_failed_nodes:
     with open(LOG_PATH, "w") as log_file:
         print("One or more nodes have failed. Please check the logs for details.", file=log_file)
+    
     webhook_url = os.environ.get("discord_webhook")
     payload = {"content": "One or more nodes have failed. Please check the logs for details."}
     requests.post(webhook_url, json=payload)
