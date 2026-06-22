@@ -1,7 +1,13 @@
+import os
 import json
 import requests
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
+LOG_PATH = os.path.join(BASE_DIR, "logs.txt")
+
 system_has_failed_nodes = False
-with open("config.json", "r") as CONFIG_FILE:
+with open(CONFIG_PATH, "r") as CONFIG_FILE:
     CONFIG_DATA = json.load(CONFIG_FILE)
     # 1. Start the loop to go through every target box
     for target in CONFIG_DATA["targets"]:
@@ -18,8 +24,8 @@ with open("config.json", "r") as CONFIG_FILE:
             system_has_failed_nodes = True
 
 if system_has_failed_nodes:
-    with open("logs.txt", "w") as log_file:
+    with open(LOG_PATH, "w") as log_file:
         print("One or more nodes have failed. Please check the logs for details.", file=log_file)
-    webhook_url = CONFIG_DATA["discord_webhook"]
+    webhook_url = os.environ.get("discord_webhook")
     payload = {"content": "One or more nodes have failed. Please check the logs for details."}
     requests.post(webhook_url, json=payload)

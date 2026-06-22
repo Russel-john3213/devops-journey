@@ -1,6 +1,4 @@
 {
-  "environment": "Production",
-  "discord_webhook": "linklink",
   "targets": [
     {
       "name": "Main Website API",
