@@ -1,0 +1,33 @@
+# 1. The name of our automation assembly line
+name: My First DevOps Pipeline
+
+# 2. TRIGGER: When should this assembly line run?
+# "Run every single time someone pushes code to the main branch"
+on:
+  push:
+    branches: [main]
+
+# 3. JOBS: What actions should the assembly line take?
+jobs:
+  inspector-job:
+    # Tell GitHub to spin up a fresh, temporary Ubuntu Linux virtual machine
+    runs-on: ubuntu-latest
+
+    # The step-by-step conveyor belt instructions
+    steps:
+      # Step A: Download a copy of your code repository onto the virtual machine
+      - name: Checkout local code to GitHub Server
+        uses: actions/checkout@v4
+
+      # Step B: Set up Python on this fresh Linux machine
+      - name: Install Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      # Step C: Execute a command to prove it works!
+      - name: Run Visual Success Check
+        run: |
+          echo "========================================="
+          echo "🚀 CI SUCCESS: The assembly line is ALIVE!"
+          echo "========================================="
