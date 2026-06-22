@@ -29,5 +29,5 @@ jobs:
       - name: Run Visual Success Check
         run: |
           echo "========================================="
-          echo "🚀 CI SUCCESS: The assembly line is ALIVE!"
+          echo "🚀 CI SUCCESS: The assembly line is ALIVE!!"
           echo "========================================="
